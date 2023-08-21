@@ -1,0 +1,70 @@
+<div class="content" style="margin-top:10%;" *ngIf="loginOrRegister">
+  <div class="container text-center">
+    <h1>
+      Login
+    </h1>
+
+    <img src="\assets\Parking-Background-PNG.png" alt="" style="width: 250px;">
+
+  </div>
+
+  <div class="container" style="width: 400px;">
+    <form>
+      <div class="mb-3">
+        <label class="form-label ">Usuário</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Nunca compartilhe suas credenciais.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Lembrar meus dados</label>
+      </div>
+      <button type="submit" class="btn btn-primary m-2">Entrar</button>
+      <button type="button" class="btn btn-outline-info" (click)="register()">Registrar-se</button>
+    </form>
+  </div>
+</div>
+
+<div class="content" style="margin-top:10%;" *ngIf="!loginOrRegister">
+  <div class="container text-center">
+    <h1>
+      Registre-se
+    </h1>
+
+    <img src="\assets\estacionamento.png" alt="" style="width: 150px;">
+
+  </div>
+
+  <div class="container" style="width: 400px;">
+    <form>
+      <div class="mb-3">
+        <label class="form-label ">Nome Completo</label>
+        <input type="text" class="form-control">
+        <label class="form-label ">Nome de Usuário</label>
+        <input type="text" class="form-control">
+        <div id="emailHelp" class="form-text">Será usado para realizar Login</div>
+        <label class="form-label ">Senha</label>
+        <input type="text" class="form-control">
+        <label class="form-label ">Cargo</label>
+        <input type="text" class="form-control">
+        <label class="form-label ">Código da Empresa</label>
+        <input type="text" class="form-control">
+
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Criar conta</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Concordo com os termos</label>
+      </div>
+      <button type="submit" class="btn btn-success m-2">Criar conta</button>
+      <button type="button" class="btn btn-outline-warning" (click)="register()">Voltar para login</button>
+    </form>
+  </div>
+</div>

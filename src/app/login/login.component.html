@@ -9,22 +9,23 @@
   </div>
 
   <div class="container" style="width: 400px;">
-    <form>
+    <form [formGroup]="formLogin" (ngSubmit)="login(usernameField.value, passwordField.value)">
       <div class="mb-3">
         <label class="form-label ">Usuário</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">Nunca compartilhe suas credenciais.</div>
+        <input type="text" class="form-control" formControlName="username" #usernameField>
+        <div class="form-text">Nunca compartilhe suas credenciais.</div>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <input type="password" class="form-control" formControlName="password" #passwordField>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Lembrar meus dados</label>
       </div>
-      <button type="submit" class="btn btn-primary m-2">Entrar</button>
+      <button type="submit" class="btn btn-primary m-2" [disabled]="formLogin.invalid">Entrar</button>
       <button type="button" class="btn btn-outline-info" (click)="register()">Registrar-se</button>
+      <div *ngIf="formLogin.controls['username'].invalid && !formLogin.controls['username'].pristine && !formLogin.controls['password'].pristine" class="form-text">Preencha os campos corretamente!</div>
     </form>
   </div>
 </div>

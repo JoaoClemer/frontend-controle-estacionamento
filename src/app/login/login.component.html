@@ -24,13 +24,13 @@
         <label class="form-check-label" for="exampleCheck1">Lembrar meus dados</label>
       </div>
       <button type="submit" class="btn btn-primary m-2" [disabled]="formLogin.invalid">Entrar</button>
-      <button type="button" class="btn btn-outline-info" (click)="register()">Registrar-se</button>
+      <button type="button" class="btn btn-outline-info" (click)="loginOrRegisterMode()">Registrar-se</button>
       <div *ngIf="formLogin.controls['username'].invalid && !formLogin.controls['username'].pristine && !formLogin.controls['password'].pristine" class="form-text">Preencha os campos corretamente!</div>
     </form>
   </div>
 </div>
 
-<div class="content" style="margin-top:10%;" *ngIf="!loginOrRegister">
+<div class="content" style="margin-top:1%;" *ngIf="!loginOrRegister">
   <div class="container text-center">
     <h1>
       Registre-se
@@ -41,31 +41,49 @@
   </div>
 
   <div class="container" style="width: 400px;">
-    <form>
+    <form [formGroup]="formRegister" (ngSubmit)="register(
+     nameField.value,
+     usernameField.value, 
+     passwordField.value, 
+     roleField.value,
+     companyField.value)">
+
       <div class="mb-3">
         <label class="form-label ">Nome Completo</label>
-        <input type="text" class="form-control">
-        <label class="form-label ">Nome de Usuário</label>
-        <input type="text" class="form-control">
-        <div id="emailHelp" class="form-text">Será usado para realizar Login</div>
-        <label class="form-label ">Senha</label>
-        <input type="text" class="form-control">
-        <label class="form-label ">Cargo</label>
-        <input type="text" class="form-control">
-        <label class="form-label ">Código da Empresa</label>
-        <input type="text" class="form-control">
-
+        <input type="text" class="form-control" formControlName="name" #nameField>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Criar conta</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label class="form-label ">Nome de Usuário</label>
+        <input type="text" class="form-control" formControlName="username" #usernameField>
+        <div id="emailHelp" class="form-text">Será usado para realizar Login</div>
       </div>
-      <div class="mb-3 form-check">
+      <div class="mb-3">
+        <label class="form-label ">Senha</label>
+        <input type="text" class="form-control" formControlName="password" #passwordField>
+      </div>
+      <div class="mb-3">
+        <label class="form-label ">Cargo</label>
+        <select class="form-control" formControlName="role" #roleField>
+          <option value="0">Administrador de Usuários</option>
+          <option value="1">Registrador de Veículos</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label ">Empresa</label>
+        <select class="form-control" formControlName="companyId" #companyField>
+          <option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label ">Código da Empresa</label>
+        <input type="text" class="form-control" formControlName="companyId" #companyField>
+      </div>
+        <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Concordo com os termos</label>
       </div>
       <button type="submit" class="btn btn-success m-2">Criar conta</button>
-      <button type="button" class="btn btn-outline-warning" (click)="register()">Voltar para login</button>
+      <button type="button" class="btn btn-outline-warning" (click)="loginOrRegisterMode()">Voltar para login</button>
     </form>
   </div>
 </div>

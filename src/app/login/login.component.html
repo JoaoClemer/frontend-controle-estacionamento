@@ -72,11 +72,7 @@
         <label class="form-label ">Empresa</label>
         <select class="form-control" formControlName="companyId" #companyField>
           <option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label ">Código da Empresa</label>
-        <input type="text" class="form-control" formControlName="companyId" #companyField>
+        </select> <i class="bi bi-arrow-down-short"></i>
       </div>
         <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">

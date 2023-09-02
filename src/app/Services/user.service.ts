@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Models/User';
 import { Observable } from 'rxjs';
 
@@ -23,5 +23,18 @@ export class UserService {
       "companyId": user.companyId,
       "role": user.role
     });
+  }
+
+  listAllUsers():Observable<any>{
+    return this.http.get(this.apiUrl);
+  }
+
+  deleteUser(userId:number, token:string|null):Observable<any>
+  {
+    var headers = new HttpHeaders({
+      "Authorization":`Bearer ${token}`
+    });
+
+    return this.http.delete(`${this.apiUrl}/${userId}`,{headers: headers});
   }
 }

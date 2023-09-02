@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../Services/user.service';
 import { CompanyService } from '../Services/company.service';
-import { Observable } from 'rxjs';
 import { Company } from '../Models/Company';
 
 @Component({
@@ -14,8 +13,10 @@ import { Company } from '../Models/Company';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-public formLogin!: FormGroup;
-public formRegister!:FormGroup;
+  public formLogin!: FormGroup;
+  public formRegister!:FormGroup;
+
+  
 constructor (private authService: AuthService, 
   private formBuilder: FormBuilder, 
   private router:Router,
@@ -24,7 +25,7 @@ constructor (private authService: AuthService,
 
 
   loginOrRegister:boolean = true;
-  companies!:Array<any>;
+  companies!:Array<Company>;
 
 
   loginOrRegisterMode(){

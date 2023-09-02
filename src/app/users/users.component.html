@@ -1,0 +1,95 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Company</th>
+            <th scope="col">Role</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.role}}</td>
+            <td>
+                <i class="bi bi-pencil-fill"
+                tooltip="Atualizar informações do usuário."
+                style="margin-right: 10px; color: blue; font-size: 20px; cursor:pointer;"
+                 (click)="ModalEditUser(templateEdit, user)"></i> 
+                <i class="bi bi-trash"
+                tooltip="Deletar o usuário."
+                style="margin-right: 10px; color: red; font-size: 20px; cursor:pointer;" 
+                (click)="ModalDeleteUser(templateDelete, user)"></i> 
+                <i class="bi bi-info-circle-fill" 
+                tooltip="Ver informações adicionais do usuário."
+                style="color: gray; font-size: 20px; 
+                cursor:pointer;"></i> </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #templateDelete>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Deletar Usuário</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRefDelete?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="text-center">Tem certeza que deseja deletar o usuário {{userAction.name}}?</p>
+          <div class="text-center" style="margin-top: 30px;">
+            <button type="button" class="btn btn-outline-success" style="margin-right: 8px;" (click)="modalRefDelete?.hide()">Voltar</button>
+            <button type="button" class="btn btn-outline-danger">Apagar<i class="bi bi-trash" (click)="deleteUser(userAction.id); modalRefDelete?.hide()" ></i></button>
+          </div> 
+        </div>
+      </ng-template>
+
+      <ng-template #templateEdit>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Editar Usuário</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRefEdit?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form [formGroup]="formEditUser" (ngSubmit)="editUser(userAction.id)">
+            <div class="mb-3">
+              <label class="form-label ">Nome Completo</label>
+              <input type="text" class="form-control" formControlName="name" #nameField>
+            </div>
+            <div class="mb-3">
+              <label class="form-label ">Nome de Usuário</label>
+              <input type="text" class="form-control" [value]="userAction.username" formControlName="username" #usernameField>
+              <div id="emailHelp" class="form-text">Será usado para realizar Login</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label ">Senha</label>
+              <input type="text" class="form-control" [value]="userAction.passwordHash" formControlName="password" #passwordField>
+            </div>
+            <div class="mb-3">
+              <label class="form-label ">Cargo</label>
+              <select class="form-control" formControlName="role" [value]="userAction.role" #roleField>
+                <option value="0">Administrador de Usuários</option>
+                <option value="1">Registrador de Veículos</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label ">Empresa</label>
+              <select class="form-control" [value]="userAction.companyId" formControlName="companyId" #companyField>
+                <option *ngFor="let company of companies" value="{{company.id}}">{{company.name}}</option>
+              </select> <i class="bi bi-arrow-down-short"></i>
+            </div>
+            </form>      
+          </div>
+          <div class="text-center" style="margin-top: 30px;">
+            <button type="button" class="btn btn-outline-success" style="margin-right: 8px;" (click)="modalRefEdit?.hide()">Voltar</button>
+            <button type="button" class="btn btn-outline-danger">Apagar<i class="bi bi-trash" (click)="deleteUser(userAction.id); modalRefEdit?.hide()" ></i></button>
+          </div> 
+        </div>
+      </ng-template>
+</div>

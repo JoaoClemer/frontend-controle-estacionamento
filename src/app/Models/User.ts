@@ -1,3 +1,5 @@
+import { Company } from "./Company";
+
 export class User
 {
   id!:number;

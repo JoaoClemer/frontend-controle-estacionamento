@@ -8,5 +8,6 @@ export class User
   passwordHash!:string;
   role!:number;
   isActive!:boolean;
+  company!:Company;
   companyId!:number;
 }

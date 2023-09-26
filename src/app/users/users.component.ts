@@ -33,7 +33,13 @@ export class UsersComponent implements OnInit {
   }
 
   ModalEditUser(template:TemplateRef<any>, user:User){
+    this.userService.getUserById(user.id).subscribe(x =>{
+    this.userAction = x.data;
     this.modalRefEdit = this.modalService.show(template);
+    console.log("modal abriu");
+    });
+    
+
     this.userAction = user;
   }
 
@@ -51,22 +57,23 @@ export class UsersComponent implements OnInit {
   }
 
 
-  editUser(userId: number){
+  editUser(user: User){
+    console.log("chamou edit");
     
     var tokenAuth = localStorage.getItem('token');
-    if(!tokenAuth){
+    if(tokenAuth == null){
       throw "Usuário sem permissão!"
-    }  
+    } 
     
+    this.userService.editUser(user,tokenAuth).subscribe();
     
-    
-  
+    console.log(user);
   }
 
   ngOnInit(): void {
 
     this.formEditUser = this.formBuilder.group({
-      name:['', Validators.compose([
+      name:['' , Validators.compose([
         Validators.required,
         Validators.maxLength(80)
       ])],

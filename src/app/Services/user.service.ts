@@ -29,6 +29,11 @@ export class UserService {
     return this.http.get(this.apiUrl);
   }
 
+  getUserById(id:number):Observable<any>{
+    
+    return this.http.get(`${this.apiUrl}/${id}`)
+  }
+
   deleteUser(userId:number, token:string|null):Observable<any>
   {
     var headers = new HttpHeaders({
@@ -37,4 +42,22 @@ export class UserService {
 
     return this.http.delete(`${this.apiUrl}/${userId}`,{headers: headers});
   }
+
+  editUser(user:User, token:string|null):Observable<any>
+  {
+    var body = 
+      {
+        "name": user.name,
+        "username": user.username,
+        "passwordHash": user.passwordHash,
+        "role": user.role
+      }
+    
+    var headers = new HttpHeaders({
+      "Authorization":`Bearer ${token}`
+    });
+
+    return this.http.put(`${this.apiUrl}/${user.id}`,body,{headers:headers});
+  }
+
 }
